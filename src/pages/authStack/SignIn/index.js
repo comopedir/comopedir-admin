@@ -1,20 +1,16 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 
-import { Context } from '../../../context/ContextProvider';
 import Loader from '../../../components/Loader';
 
 const AUTHENTICATE = gql`
   mutation($input: authInput!) {
     auth(input: $input) {
       token
-      business {
-        id
-      }
     }
   }
 `;
@@ -22,7 +18,6 @@ const AUTHENTICATE = gql`
 export default function SignIn() {
 
   const [error, setError] = useState([]);
-  const context = useContext(Context);
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   
@@ -32,27 +27,25 @@ export default function SignIn() {
   
   const onSubmit = async data => {  
 
-    const { username, password } = data;
+    const { email, password } = data;
 
     try {
       setError('');
 
-      if (!username || !password) {
-        setError('Usuário ou senha obrigatórios.');
+      if (!email || !password) {
+        setError('Email ou senha obrigatórios.');
         return;
       }
 
       const { data } = await authenticate({
         variables: {
           input: {
-            username,
+            email,
             password,
             role: 'admin',
           },
         },
       });
-
-      context.setBusinessId(data.auth.business.id);
 
       localStorage.setItem('@comopedir:token', data.auth.token);
 
@@ -80,11 +73,11 @@ export default function SignIn() {
         <fieldset>
           <legend>Identificação</legend>
           <div>
-            <label htmlFor="username">Usuário:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="text"
-              name="username"
-              autoComplete="username"
+              name="email"
+              autoComplete="email"
               ref={register({ required: true })}
             />
           </div>

@@ -26,7 +26,7 @@ const BusinessList = ({data}) => {
             <td>{business.name}</td>
             <td>
               <ul>
-                <li><Link to={`/config/${business.slug}`}>Configurações</Link></li>
+                <li><Link to={`/config/${business.id}`}>Configurações</Link></li>
               </ul>
             </td>
           </tr>

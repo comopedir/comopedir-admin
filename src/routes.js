@@ -37,7 +37,7 @@ export default function Routes() {
             <h3>Estabelecimentos</h3>
             <Dashboard />
           </PrivateRoute>
-          <PrivateRoute path="/config/:username">
+          <PrivateRoute path="/config/:id">
             <h2>Configurações</h2>
             <Configurations />
           </PrivateRoute>
