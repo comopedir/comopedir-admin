@@ -70,7 +70,7 @@ export default function SignIn() {
     <Fragment>
       <Loader loading={loading} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <fieldset>
+        <fieldset className="gray">
           <legend>Identificação</legend>
           <div>
             <label htmlFor="email">Email:</label>
