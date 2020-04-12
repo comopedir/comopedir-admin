@@ -13,7 +13,7 @@ export default () => {
         <Link to="/">Como pedir</Link>
       </h1>
       {
-        context.businessId ? (
+        context.token ? (
           <Link to="/logoff">Sair do sistema</Link>
         ) : (
           <Fragment />

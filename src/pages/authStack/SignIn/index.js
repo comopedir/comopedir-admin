@@ -1,16 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 
+import { Context } from '../../../context/ContextProvider';
 import Loader from '../../../components/Loader';
 
 const AUTHENTICATE = gql`
-  mutation($input: authInput!) {
+  mutation($input: AuthInput!) {
     auth(input: $input) {
       token
+      role
+      person {
+        id
+        name
+        account {
+          id
+          phoneNumber
+          phoneAreaCode
+          phoneCountryCode
+          email
+          status
+        }
+      }
     }
   }
 `;
@@ -18,6 +32,7 @@ const AUTHENTICATE = gql`
 export default function SignIn() {
 
   const [error, setError] = useState([]);
+  const context = useContext(Context);
   const { register, handleSubmit, errors } = useForm();
   let history = useHistory();
   
@@ -47,7 +62,27 @@ export default function SignIn() {
         },
       });
 
-      localStorage.setItem('@comopedir:token', data.auth.token);
+      const { token, role: accountRole } = data.auth;
+      const { id: personId, name: personName } = data.auth.person;
+      const {
+        id: accountId,
+        phoneNumber,
+        phoneAreaCode,
+        phoneCountryCode,
+        email: accountEmail,
+        status,
+      } = data.auth.person.account;
+
+      context.setToken(token);
+      context.setRole(accountRole);
+      context.setPersonId(personId);
+      context.setPersonName(personName);
+      context.setAccountId(accountId);
+      context.setPhoneNumber(phoneNumber);
+      context.setPhoneAreaCode(phoneAreaCode);
+      context.setPhoneCountryCode(phoneCountryCode);
+      context.setEmail(accountEmail);
+      context.setStatus(status);
 
       setError('');
 

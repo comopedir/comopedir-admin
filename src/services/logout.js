@@ -1,11 +1,12 @@
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+  Redirect
+} from "react-router-dom";
+import { Context } from '../context/ContextProvider';
 
 export default () => {
   
-  let history = useHistory();
-
-  localStorage.removeItem('@comopedir:token');
-  localStorage.removeItem('@comopedir:businessId');
-  history.push('/login');
-  return null;
+  const context = useContext(Context);
+  context.setLogoff();
+  return <Redirect to="/login"/>;
 }
