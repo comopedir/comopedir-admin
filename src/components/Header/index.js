@@ -14,7 +14,11 @@ export default () => {
       </h1>
       {
         context.token ? (
-          <Link to="/logoff">Sair do sistema</Link>
+          <ul>
+            <li><Link to="/dashboard">Estabelecimentos</Link></li>
+            <li><Link to="/import">Importação (Airtable)</Link></li>
+            <li><Link to="/logoff">Sair do sistema</Link></li>
+          </ul>
         ) : (
           <Fragment />
         )

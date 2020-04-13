@@ -2,16 +2,16 @@ import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
-import BusinessList from '../../../components/BusinessList';
+import AirtableBusinessList from '../../../components/AirtableBusinessList';
 
-export const GET_BUSINESSES = gql`
-  query allBusinesses {
-    businesses(first: 9999) {
+export const GET_AIRTABLE_BUSINESSES = gql`
+  query allAirtableBusinesses {
+    airtableBusinesses(first: 9999) {
       edges {
         node {
           id
           name
-          slug
+          airtableId
         }
       }
     }
@@ -20,14 +20,14 @@ export const GET_BUSINESSES = gql`
 
 const Dashboard = props => {
 
-  const { loading, error, data } = useQuery(GET_BUSINESSES);
+  const { loading, error, data } = useQuery(GET_AIRTABLE_BUSINESSES);
 
   if (loading) return <div>Carregando</div>;
   if (error) return <div>Algo deu errado.</div>;
 
   return (
     <Fragment>
-      <BusinessList data={data}/>
+      <AirtableBusinessList data={data}/>
     </Fragment>
   );
 };

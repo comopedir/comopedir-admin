@@ -14,7 +14,10 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import SignIn from "./pages/authStack/SignIn";
 import SignOff from "./services/logout";
 import Dashboard from "./pages/dashboardStack/Dashboard";
-import Configurations from "./pages/dashboardStack/Configurations";
+import Configuration from "./pages/dashboardStack/Configuration";
+import AirtableConfiguration from "./pages/dashboardStack/AirtableConfiguration";
+
+import Import from "./pages/dashboardStack/Import";
 
 export default function Routes() {
 
@@ -37,12 +40,21 @@ export default function Routes() {
             <h3>Estabelecimentos</h3>
             <Dashboard />
           </PrivateRoute>
+          <PrivateRoute path="/import/business/:airtableId">
+            <h2>Airtable - Estabelecimento</h2>
+            <AirtableConfiguration />
+          </PrivateRoute>
+          <PrivateRoute path="/import">
+            <h2>Importação</h2>
+            <h3>Estabelecimentos</h3>
+            <Import />
+          </PrivateRoute>
           <PrivateRoute path="/config/:id">
             <h2>Configurações</h2>
-            <Configurations />
+            <Configuration />
           </PrivateRoute>
           <Route exact path="/" render={() => (
-            context.sellerId ? (
+            context.token ? (
               <Redirect to="/dashboard"/>
             ) : (
               <Redirect to="/login"/>
