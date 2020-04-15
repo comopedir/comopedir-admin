@@ -1,24 +1,10 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
+import { GET_BUSINESSES } from '../../../queries';
 import BusinessList from '../../../components/BusinessList';
 
-export const GET_BUSINESSES = gql`
-  query allBusinesses {
-    businesses(first: 9999) {
-      edges {
-        node {
-          id
-          name
-          slug
-        }
-      }
-    }
-  }
-`;
-
-const Dashboard = props => {
+const Dashboard = () => {
 
   const { loading, error, data } = useQuery(GET_BUSINESSES);
 

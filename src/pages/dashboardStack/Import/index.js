@@ -1,22 +1,8 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
+import { GET_AIRTABLE_BUSINESSES } from '../../../queries';
 import AirtableBusinessList from '../../../components/AirtableBusinessList';
-
-export const GET_AIRTABLE_BUSINESSES = gql`
-  query allAirtableBusinesses {
-    airtableBusinesses(first: 9999) {
-      edges {
-        node {
-          id
-          name
-          airtableId
-        }
-      }
-    }
-  }
-`;
 
 const Dashboard = props => {
 
