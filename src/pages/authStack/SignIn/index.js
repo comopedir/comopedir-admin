@@ -1,33 +1,12 @@
 import React, { Fragment, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 
+import { AUTHENTICATE } from '../../../queries';
 import { Context } from '../../../context/ContextProvider';
 import Loader from '../../../components/Loader';
-
-const AUTHENTICATE = gql`
-  mutation($input: AuthInput!) {
-    auth(input: $input) {
-      token
-      role
-      person {
-        id
-        name
-        account {
-          id
-          phoneNumber
-          phoneAreaCode
-          phoneCountryCode
-          email
-          status
-        }
-      }
-    }
-  }
-`;
 
 export default function SignIn() {
 
