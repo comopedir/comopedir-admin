@@ -22,7 +22,7 @@ const { register, errors, handleSubmit } = useForm();
 const TEXT_MUTATION_QUERY = gql`
   mutation ($input: ${input}!) {
     ${mutation}(input: $input) {
-      seller {
+      business {
         id
       }
     }
@@ -42,7 +42,7 @@ const TEXT_MUTATION_QUERY = gql`
       await updateTextMutation({
         variables: {
           input: {
-            sellerId: id,
+            business: id,
             field,
             value: formValue,
           },
