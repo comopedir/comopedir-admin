@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TextEditor from "../TextEditor";
+import SelectEditor from "../SelectEditor";
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
@@ -19,10 +20,23 @@ const BusinessWidget = ({title, data, className, refetch}) => {
     updatedAt,
    } = data;
 
+  console.log('network:', network);
+  
   return (
     <div className={className}>
       <fieldset>
         <legend>{title}</legend>
+
+        <SelectEditor
+          id={id}
+          mutation="updateBusiness"
+          input="UpdateBusinessInput"
+          field="network"
+          collection="networks"
+          legend="Network"
+          value={network}
+          refetch={refetch}
+        />
 
         <TextEditor
           id={id}
