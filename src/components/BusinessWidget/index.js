@@ -4,6 +4,7 @@ import TextViewer from '../TextViewer';
 import TextEditor from '../TextEditor';
 import SelectEditor from '../SelectEditor';
 import AddressEditor from '../AddressEditor';
+import CheckboxEditor from '../CheckboxEditor';
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
@@ -58,9 +59,43 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           refetch={refetch}
         />
 
-        <AddressEditor
+        <CheckboxEditor
           id={id}
-          legend="Endereço"
+          mutation="associateCategories"
+          input="AssociateCategoriesInput"
+          field="categories"
+          collection="categories"
+          collectionAssociation="businessCategory"
+          legend="Categorias"
+          value={categories}
+          refetch={refetch}
+        />
+
+        <CheckboxEditor
+          id={id}
+          mutation="associateServices"
+          input="AssociateServicesInput"
+          field="services"
+          collection="services"
+          collectionAssociation="businessService"
+          legend="Serviços"
+          value={services}
+          refetch={refetch}
+        />
+
+        <CheckboxEditor
+          id={id}
+          mutation="associatePaymentTypes"
+          input="AssociatePaymentTypesInput"
+          field="paymentTypes"
+          collection="paymentTypes"
+          collectionAssociation="businessPaymentType"
+          legend="Tipos de pagamento"
+          value={paymentTypes}
+          refetch={refetch}
+        />
+
+        <AddressEditor
           addresses={addresses}
           refetch={refetch}
         />
