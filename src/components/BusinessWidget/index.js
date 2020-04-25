@@ -1,15 +1,16 @@
 import React from 'react';
 
-import TextEditor from "../TextEditor";
-import SelectEditor from "../SelectEditor";
+import TextViewer from '../TextViewer';
+import TextEditor from '../TextEditor';
+import SelectEditor from '../SelectEditor';
+import AddressEditor from '../AddressEditor';
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
   const {
-    address,
+    addresses,
     categories,
     channels,
-    createdAt,
     id,
     name,
     network,
@@ -17,10 +18,9 @@ const BusinessWidget = ({title, data, className, refetch}) => {
     pictures,
     services,
     slug,
+    createdAt,
     updatedAt,
    } = data;
-
-  console.log('network:', network);
   
   return (
     <div className={className}>
@@ -56,6 +56,23 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           legend="Nome do restaurante"
           value={name}
           refetch={refetch}
+        />
+
+        <AddressEditor
+          id={id}
+          legend="Endereço"
+          addresses={addresses}
+          refetch={refetch}
+        />
+
+        <TextViewer
+          legend="Criado em"
+          value={createdAt}
+        />
+
+        <TextViewer
+          legend="Alterado em"
+          value={updatedAt}
         />
 
       </fieldset>
