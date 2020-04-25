@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import Loader from '../Loader';
 
-const TextEditor = ({
+const SelectEditor = ({
   id, 
   mutation, 
   input, 
   field,
+  collection,
   legend,
   value,
   refetch,
-  multiline = false,
 }) => {
+
+const SELECT_EDITOR_COLLECTION_QUERY = gql`
+  query collectionItems {
+    ${collection}(first: 9999) {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+  }
+`;
 
 const [error, setError] = useState([]);
 const { register, errors, handleSubmit } = useForm();
 
-const TEXT_MUTATION_QUERY = gql`
+const SELECT_EDITOR_MUTATION = gql`
   mutation ($input: ${input}!) {
     ${mutation}(input: $input) {
       business {
@@ -30,7 +44,7 @@ const TEXT_MUTATION_QUERY = gql`
 `;
   
   const [updateTextMutation, { loading }] = useMutation(
-    TEXT_MUTATION_QUERY
+    SELECT_EDITOR_MUTATION
   );
   
   const [formValue, setFormValue] = useState("");
@@ -68,33 +82,40 @@ const TEXT_MUTATION_QUERY = gql`
 
   };
 
+  const { loading: collectionLoading, error: collectionError, data: collectionData } = useQuery(SELECT_EDITOR_COLLECTION_QUERY, {
+    variables: { id },
+  });
+  
+  if (collectionLoading) return <div>Carregando</div>;
+  if (collectionError) return <div>Algo deu errado.</div>;
+
+  const { edges } = collectionData[collection];
+
   return (
     <>
       <Loader loading={loading} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor={field}>{legend}:</label>
-          {
-            multiline ? (
-              <textarea
-                name={field}
-                ref={register({ required: true })}
-                defaultValue={value}
-                onChange={e => setFormValue(e.target.value)}
-                cols="60"
-                rows="6"
-              />
-            ):(
-              <input
-                type="text"
-                name={field}
-                ref={register({ required: true })}
-                defaultValue={value}
-                onChange={e => setFormValue(e.target.value)}
-                size="60"
-              />
-            )
-          }
+            <select
+              name={field}
+              ref={register({ required: false })}
+              onChange={e => setFormValue(e.target.value)}
+              defaultValue={value ? value.id : null}
+            >
+              <option value="">Selecione...</option>
+              {
+                edges.map(item => {
+                  return (
+                    <option
+                      key={item.node.id}
+                      value={item.node.id}
+                    >{item.node.name} - ({item.node.slug})</option>
+                  )
+                })
+              }
+
+            </select>
           <input type="submit" value="Atualizar" />
         </div>
         <div className="errors">
@@ -106,4 +127,4 @@ const TEXT_MUTATION_QUERY = gql`
   );
 }
 
-export default TextEditor;
+export default SelectEditor;

@@ -21,7 +21,7 @@ const Configuration = () => {
         <BusinessWidget 
           className="widget col2 yellow" 
           title="Dados do restaurante"
-          data={data.seller}
+          data={data.business}
           refetch={refetch}
         />
       </div>

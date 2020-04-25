@@ -1,73 +1,118 @@
 import React from 'react';
 
-// import TextEditor from "../TextEditor";
+import TextViewer from '../TextViewer';
+import TextEditor from '../TextEditor';
+import SelectEditor from '../SelectEditor';
+import AddressEditor from '../AddressEditor';
+import CheckboxEditor from '../CheckboxEditor';
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
-  console.log('Business Widget title:', title);
-  console.log('Business Widget className:', className);
-  console.log('Business Widget refetch:', refetch);
-  console.log('Business Widget data:', data);
+  const {
+    addresses,
+    categories,
+    channels,
+    id,
+    name,
+    network,
+    paymentTypes,
+    pictures,
+    services,
+    slug,
+    createdAt,
+    updatedAt,
+   } = data;
+  
+  return (
+    <div className={className}>
+      <fieldset>
+        <legend>{title}</legend>
 
-  return <div />;
+        <SelectEditor
+          id={id}
+          mutation="updateBusiness"
+          input="UpdateBusinessInput"
+          field="network"
+          collection="networks"
+          legend="Network"
+          value={network}
+          refetch={refetch}
+        />
 
-  // const {
-  //   id,
-  //   firstName,
-  //   lastName,
-  //   presentationName,
-  //   bio
-  //  } = data;
+        <TextEditor
+          id={id}
+          mutation="updateBusiness"
+          input="UpdateBusinessInput"
+          field="slug"
+          legend="Slug do restaurante (nome na URL)"
+          value={slug}
+          refetch={refetch}
+        />
 
-  // return (
-  //   <div className={className}>
-  //     <fieldset>
-  //       <legend>{title}</legend>
+        <TextEditor
+          id={id}
+          mutation="updateBusiness"
+          input="UpdateBusinessInput"
+          field="name"
+          legend="Nome do restaurante"
+          value={name}
+          refetch={refetch}
+        />
 
-  //       <TextEditor
-  //         id={id}
-  //         mutation="updateSeller"
-  //         input="updateSellerInput"
-  //         field="firstName"
-  //         legend="Primeiro nome"
-  //         value={firstName}
-  //         refetch={refetch}
-  //       />
+        <CheckboxEditor
+          id={id}
+          mutation="associateCategories"
+          input="AssociateCategoriesInput"
+          field="categories"
+          collection="categories"
+          collectionAssociation="businessCategory"
+          legend="Categorias"
+          value={categories}
+          refetch={refetch}
+        />
 
-  //       <TextEditor
-  //         id={id}
-  //         mutation="updateSeller"
-  //         input="updateSellerInput"
-  //         field="lastName"
-  //         legend="Sobrenome"
-  //         value={lastName}
-  //         refetch={refetch}
-  //       />
+        <CheckboxEditor
+          id={id}
+          mutation="associateServices"
+          input="AssociateServicesInput"
+          field="services"
+          collection="services"
+          collectionAssociation="businessService"
+          legend="Serviços"
+          value={services}
+          refetch={refetch}
+        />
 
-  //       <TextEditor
-  //         id={id}
-  //         mutation="updateSeller"
-  //         input="updateSellerInput"
-  //         field="presentationName"
-  //         legend="Nome de apresentação"
-  //         value={presentationName}
-  //         refetch={refetch}
-  //       />
+        <CheckboxEditor
+          id={id}
+          mutation="associatePaymentTypes"
+          input="AssociatePaymentTypesInput"
+          field="paymentTypes"
+          collection="paymentTypes"
+          collectionAssociation="businessPaymentType"
+          legend="Tipos de pagamento"
+          value={paymentTypes}
+          refetch={refetch}
+        />
 
-  //       <TextEditor
-  //         id={id}
-  //         mutation="updateSeller"
-  //         input="updateSellerInput"
-  //         field="bio"
-  //         legend="Bio"
-  //         value={bio}
-  //         refetch={refetch}
-  //         multiline
-  //       />
+        <AddressEditor
+          addresses={addresses}
+          refetch={refetch}
+        />
 
-  //     </fieldset>
-  //   </div>
-  // )
+        <TextViewer
+          legend="Criado em"
+          value={createdAt}
+        />
+
+        <TextViewer
+          legend="Alterado em"
+          value={updatedAt}
+        />
+
+      </fieldset>
+    </div>
+  )
 }
 
 export default BusinessWidget;

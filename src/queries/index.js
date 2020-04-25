@@ -69,6 +69,9 @@ export const GET_BUSINESS = gql`
       slug
       name
       addresses {
+        business {
+          id
+        }
         id
         latitude
         longitude
