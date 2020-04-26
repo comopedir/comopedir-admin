@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import Loader from '../Loader';
 
-const CheckboxEditor = ({
+const CheckboxWithValueEditor = ({
   id, 
   mutation, 
   input, 
@@ -16,6 +16,8 @@ const CheckboxEditor = ({
   value,
   refetch,
 }) => {
+
+  
   const CHECKBOX_EDITOR_COLLECTION_QUERY = gql`
     query collectionItems {
       ${collection}(first: 9999) {
@@ -52,14 +54,12 @@ const CheckboxEditor = ({
       setError('');
 
       const updateData = {};
+      updateData[collection] = [];
 
-      if (data[collection]) {
-        updateData[collection] = data[collection];
-      }
-      else
-      {
-        updateData[collection] = [];
-      }
+      data[field].map(field => {
+        updateData[collection].push([field, data[field]])
+        return '';
+      });
 
       await updateCheckboxMutation({
         variables: {
@@ -114,12 +114,25 @@ const CheckboxEditor = ({
                     type="checkbox"
                     id={item.node.slug}
                     defaultChecked={(() => {
-                      const selected = value.filter(valueItem => valueItem.id === item.node.id);
+                      const selected = value.filter(valueItem => valueItem[field].id === item.node.id);
                       return selected.length > 0;
                     })()}
                     value={item.node.id}
                   />
-                  <label htmlFor={item.node.slug}>{item.node.slug}</label>
+                  <label htmlFor={item.node.slug}>{item.node.slug}:</label>
+                  <input
+                    name={item.node.id}
+                    ref={register({ required: false })}
+                    type="text"
+                    size="60"
+                    defaultValue={(() => {
+                      const selected = value.filter(valueItem => valueItem[field].id === item.node.id);
+                      if (selected.length > 0) {
+                        return selected[0].value;
+                      }
+                    })()}
+                  />
+                  <br />
                 </Fragment>
               )
             })
@@ -134,4 +147,4 @@ const CheckboxEditor = ({
   );
 }
 
-export default CheckboxEditor;
+export default CheckboxWithValueEditor;
