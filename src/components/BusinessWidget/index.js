@@ -5,6 +5,7 @@ import TextEditor from '../TextEditor';
 import SelectEditor from '../SelectEditor';
 import AddressEditor from '../AddressEditor';
 import CheckboxEditor from '../CheckboxEditor';
+import CheckboxWithValueEditor from '../CheckboxWithValueEditor';
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
@@ -22,7 +23,7 @@ const BusinessWidget = ({title, data, className, refetch}) => {
     createdAt,
     updatedAt,
    } = data;
-  
+
   return (
     <div className={className}>
       <fieldset>
@@ -56,6 +57,18 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           field="name"
           legend="Nome do restaurante"
           value={name}
+          refetch={refetch}
+        />
+
+        <CheckboxWithValueEditor
+          id={id}
+          mutation="associateChannels"
+          input="AssociateChannelsInput"
+          field="channel"
+          collection="channels"
+          collectionAssociation="businessChannel"
+          legend="Canais"
+          value={channels}
           refetch={refetch}
         />
 
