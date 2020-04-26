@@ -52,7 +52,14 @@ const CheckboxEditor = ({
       setError('');
 
       const updateData = {};
-      updateData[collection] = data[collection];
+
+      if (data[collection]) {
+        updateData[collection] = data[collection];
+      }
+      else
+      {
+        updateData[collection] = [];
+      }
 
       await updateCheckboxMutation({
         variables: {
