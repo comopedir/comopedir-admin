@@ -88,6 +88,10 @@ table.list td {
   padding: 6px 10px;
 }
 
+table.list td.active {
+  background-color: #4DB6AC;
+}
+
 table.list thead td {
   font-family: 'Circular-Std-Book', 'Roboto', sans-serif;
   font-size: 1.2em;

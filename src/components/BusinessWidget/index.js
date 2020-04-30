@@ -7,6 +7,7 @@ import AddressEditor from '../AddressEditor';
 import CheckboxEditor from '../CheckboxEditor';
 import CheckboxWithValueEditor from '../CheckboxWithValueEditor';
 import PicturesEditor from '../PicturesEditor';
+import DeleteEditor from '../DeleteEditor';
 
 const BusinessWidget = ({title, data, className, refetch}) => {
 
@@ -119,7 +120,6 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           mutation="updateBusiness"
           input="UpdateBusinessInput"
           field="pictures"
-          collection="pictures"
           legend="Imagens"
           value={pictures}
           refetch={refetch}
@@ -133,6 +133,13 @@ const BusinessWidget = ({title, data, className, refetch}) => {
         <TextViewer
           legend="Alterado em"
           value={updatedAt}
+        />
+
+        <DeleteEditor
+          id={id}
+          mutation="deleteBusiness"
+          input="DeleteBusinessInput"
+          legend="Apagar restaurante"
         />
 
       </fieldset>
