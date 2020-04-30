@@ -189,6 +189,7 @@ export const GET_BUSINESSES = gql`
           id
           name
           slug
+          airtableId
         }
       }
     }
