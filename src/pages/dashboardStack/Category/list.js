@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_CATEGORIES } from '../../../queries';
 import CategoryList from '../../../components/CategoryList';
 
-const Category = () => {
+export default () => {
   const { loading, error, data } = useQuery(GET_CATEGORIES);
 
   if (loading) return <div>Carregando</div>;
@@ -17,4 +17,3 @@ const Category = () => {
   );
 };
 
-export default Category;

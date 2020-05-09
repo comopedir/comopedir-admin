@@ -57,6 +57,15 @@ export const GET_AIRTABLE_BUSINESSES = gql`
   }
 `;
 
+export const GET_BUSINESS_BY_AIRTABLE_ID = gql`
+query getBusiness($airtableId: String) {
+  business(airtableId: $airtableId) {
+    id
+    airtableId
+  }
+}
+`;
+
 export const GET_BUSINESS = gql`
   query getBusiness($id: String) {
     business(id: $id) {
@@ -172,15 +181,6 @@ export const GET_BUSINESS = gql`
   }
 `;
 
-export const GET_BUSINESS_BY_AIRTABLE_ID = gql`
-query getBusiness($airtableId: String) {
-  business(airtableId: $airtableId) {
-    id
-    airtableId
-  }
-}
-`;
-
 export const GET_BUSINESSES = gql`
   query allBusinesses {
     businesses(first: 9999) {
@@ -215,6 +215,26 @@ export const GET_CATEGORIES = gql`
             description
           }
         }
+      }
+    }
+  }
+`;
+
+export const GET_CATEGORY = gql`
+  query getCategory($id: String) {
+    category(id: $id) {
+      id
+      slug
+      priority
+      translations {
+        id
+        language {
+          id
+          isoCode
+          name
+        }
+        name
+        description
       }
     }
   }

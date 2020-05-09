@@ -35,6 +35,7 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           id={id}
           mutation="updateBusiness"
           input="UpdateBusinessInput"
+          node="business"
           field="network"
           collection="networks"
           legend="Network"
@@ -46,6 +47,7 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           id={id}
           mutation="updateBusiness"
           input="UpdateBusinessInput"
+          node="business"
           field="slug"
           legend="Slug do restaurante (nome na URL)"
           value={slug}
@@ -56,6 +58,7 @@ const BusinessWidget = ({title, data, className, refetch}) => {
           id={id}
           mutation="updateBusiness"
           input="UpdateBusinessInput"
+          node="business"
           field="name"
           legend="Nome do restaurante"
           value={name}

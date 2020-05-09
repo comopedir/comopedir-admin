@@ -8,7 +8,8 @@ import Loader from '../Loader';
 const TextEditor = ({
   id, 
   mutation, 
-  input, 
+  input,
+  node,
   field,
   legend,
   value,
@@ -22,7 +23,7 @@ const { register, errors, handleSubmit } = useForm();
 const TEXT_MUTATION_QUERY = gql`
   mutation ($input: ${input}!) {
     ${mutation}(input: $input) {
-      business {
+      ${node} {
         id
       }
     }
@@ -33,26 +34,24 @@ const TEXT_MUTATION_QUERY = gql`
     TEXT_MUTATION_QUERY
   );
   
-  const [formValue, setFormValue] = useState("");
-
   const onSubmit = async data => {  
     try {
       setError('');
 
+      const updatePayload = {
+        field,
+        value: data[field],
+      };
+      updatePayload[node] = id;
+
       await updateTextMutation({
         variables: {
-          input: {
-            business: id,
-            field,
-            value: formValue,
-          },
+          input: updatePayload,
         },
       });
 
       setError('');
-
       alert('Alteração concluída com sucesso.')
-
       refetch();
 
     } catch (err) {
@@ -80,7 +79,6 @@ const TEXT_MUTATION_QUERY = gql`
                 name={field}
                 ref={register({ required: true })}
                 defaultValue={value}
-                onChange={e => setFormValue(e.target.value)}
                 cols="60"
                 rows="6"
               />
@@ -90,7 +88,6 @@ const TEXT_MUTATION_QUERY = gql`
                 name={field}
                 ref={register({ required: true })}
                 defaultValue={value}
-                onChange={e => setFormValue(e.target.value)}
                 size="60"
               />
             )
