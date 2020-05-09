@@ -195,3 +195,27 @@ export const GET_BUSINESSES = gql`
     }
   }
 `;
+
+export const GET_CATEGORIES = gql`
+  query allCategories {
+    categories(first: 9999) {
+      edges {
+        node {
+          id
+          slug
+          priority
+          translations {
+            id
+            language {
+              id
+              isoCode
+              name
+            }
+            name
+            description
+          }
+        }
+      }
+    }
+  }
+`;
