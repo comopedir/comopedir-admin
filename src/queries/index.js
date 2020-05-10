@@ -239,3 +239,27 @@ export const GET_CATEGORY = gql`
     }
   }
 `;
+
+export const GET_LANGUAGES = gql`
+  query allLanguages {
+    languages(first: 9999) {
+      edges {
+        node {
+          id
+          isoCode
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_LANGUAGE = gql`
+  query getLanguage($id: String) {
+    langugae(id: $id) {
+      id
+      isoCode
+      name
+    }
+  }
+`;
