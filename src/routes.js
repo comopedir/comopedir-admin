@@ -18,6 +18,8 @@ import Configuration from "./pages/dashboardStack/Configuration";
 import AirtableConfiguration from "./pages/dashboardStack/AirtableConfiguration";
 import Categories from "./pages/dashboardStack/Category/list";
 import Category from "./pages/dashboardStack/Category/edit";
+import Languages from "./pages/dashboardStack/Language/list";
+import Language from "./pages/dashboardStack/Language/edit";
 
 import Import from "./pages/dashboardStack/Import";
 
@@ -62,6 +64,18 @@ export default function Routes() {
           <PrivateRoute path="/category/:id">
             <h2>Categoria</h2>
             <Category />
+          </PrivateRoute>
+          <PrivateRoute path="/languages">
+            <h2>Linguagens</h2>
+            <Languages />
+          </PrivateRoute>
+          <PrivateRoute path="/language/new">
+            <h2>Linguagem - Criar</h2>
+            <Language />
+          </PrivateRoute>
+          <PrivateRoute path="/language/:id">
+            <h2>Linguagem</h2>
+            <Language />
           </PrivateRoute>
           <Route exact path="/" render={() => (
             context.token ? (
