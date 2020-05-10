@@ -140,6 +140,8 @@ const BusinessWidget = ({title, data, className, refetch}) => {
 
         <DeleteEditor
           id={id}
+          node="business"
+          collection="businesses"
           mutation="deleteBusiness"
           input="DeleteBusinessInput"
           legend="Apagar restaurante"

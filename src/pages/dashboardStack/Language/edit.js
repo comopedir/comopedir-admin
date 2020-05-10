@@ -21,7 +21,7 @@ export default () => {
         <LanguageEdit 
           className="widget col2 yellow" 
           title="Dados da Linguagem"
-          data={data.category}
+          data={data.language}
           refetch={refetch}
         />
       </div>

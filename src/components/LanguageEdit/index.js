@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TextEditor from '../TextEditor';
+import DeleteEditor from '../DeleteEditor';
 
 const LanguageEdit = ({title, data, className, refetch}) => {
 
@@ -35,6 +36,15 @@ const LanguageEdit = ({title, data, className, refetch}) => {
           legend="Nome da linguagem:"
           value={name}
           refetch={refetch}
+        />
+
+        <DeleteEditor
+          id={id}
+          node="language"
+          collection="languages"
+          mutation="deleteLanguage"
+          input="DeleteLanguageInput"
+          legend="Apagar linguagem"
         />
 
       </fieldset>
