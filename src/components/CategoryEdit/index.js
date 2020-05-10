@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TextEditor from '../TextEditor';
+import TranslationEditor from '../TranslationEditor';
 
 const CategoryEdit = ({title, data, className, refetch}) => {
 
@@ -29,6 +30,28 @@ const CategoryEdit = ({title, data, className, refetch}) => {
           field="slug"
           legend="Slug da categoria (nome na URL)"
           value={slug}
+          refetch={refetch}
+        />
+
+        <TextEditor
+          id={id}
+          mutation="updateCategory"
+          input="UpdateCategoryInput"
+          node="category"
+          field="priority"
+          legend="Prioridade"
+          value={priority}
+          refetch={refetch}
+        />
+
+        <TranslationEditor
+          id={id}
+          mutation="updateCategory"
+          input="UpdateCategoryInput"
+          node="category"
+          field="priority"
+          legend="Traduções"
+          value={priority}
           refetch={refetch}
         />
 
