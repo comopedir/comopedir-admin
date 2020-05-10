@@ -10,10 +10,6 @@ const LanguageEdit = ({title, data, className, refetch}) => {
     name
    } = data;
 
-   console.log('id:', id);
-   console.log('isoCode:', isoCode);
-   console.log('name:', name);
-
   return (
     <div className={className}>
       <fieldset>

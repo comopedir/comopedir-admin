@@ -20,6 +20,7 @@ import Categories from "./pages/dashboardStack/Category/list";
 import Category from "./pages/dashboardStack/Category/edit";
 import Languages from "./pages/dashboardStack/Language/list";
 import Language from "./pages/dashboardStack/Language/edit";
+import LanguageNew from "./pages/dashboardStack/Language/new";
 
 import Import from "./pages/dashboardStack/Import";
 
@@ -71,7 +72,7 @@ export default function Routes() {
           </PrivateRoute>
           <PrivateRoute path="/language/new">
             <h2>Linguagem - Criar</h2>
-            <Language />
+            <LanguageNew />
           </PrivateRoute>
           <PrivateRoute path="/language/:id">
             <h2>Linguagem</h2>

@@ -256,7 +256,7 @@ export const GET_LANGUAGES = gql`
 
 export const GET_LANGUAGE = gql`
   query getLanguage($id: String) {
-    langugae(id: $id) {
+    language(id: $id) {
       id
       isoCode
       name
