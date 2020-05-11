@@ -7,7 +7,9 @@ import { useHistory } from "react-router-dom";
 import Loader from '../Loader';
 
 const DeleteEditor = ({
-  id, 
+  id,
+  node,
+  collection,
   mutation, 
   input, 
   legend,
@@ -20,7 +22,7 @@ let history = useHistory();
 const EDITOR_DELETION_QUERY = gql`
   mutation ($input: ${input}!) {
     ${mutation}(input: $input) {
-      business {
+      ${node} {
         id
       }
     }
@@ -35,11 +37,12 @@ const EDITOR_DELETION_QUERY = gql`
     try {
       setError('');
 
+      const deletePayload = {};
+      deletePayload[node] = id;
+
       await editorDeleteMutation({
         variables: {
-          input: {
-            business: id,
-          },
+          input: deletePayload,
         },
       });
 
@@ -47,7 +50,7 @@ const EDITOR_DELETION_QUERY = gql`
 
       alert('Deleção concluída com sucesso.')
 
-      history.push(`/dashboard/${Math.random()}`);
+      history.push(`/${collection}/${Math.random()}`);
 
     } catch (err) {
       if (err.graphQLErrors?.length > 0) {

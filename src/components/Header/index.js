@@ -17,6 +17,8 @@ export default () => {
           <ul>
             <li><Link to="/dashboard">Estabelecimentos</Link></li>
             <li><Link to="/import">Importação (Airtable)</Link></li>
+            <li><Link to="/categories">Categorias</Link></li>
+            <li><Link to="/languages">Linguagens</Link></li>
             <li><Link to="/logoff">Sair do sistema</Link></li>
           </ul>
         ) : (
