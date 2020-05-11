@@ -11,8 +11,6 @@ const CategoryList = ({data}) => {
       translations: o.node.translations,
     })
   );
-
-  console.log(categories);
   
   return (
     <table className="list green">
@@ -31,7 +29,10 @@ const CategoryList = ({data}) => {
             <td>{category.priority}</td>
             <td>{
               category.translations.map(translation => (
-                <div> Yeah </div>
+                <div key={translation.id}> 
+                  <strong>{translation.language.isoCode}:</strong><br />
+                  {translation.name}
+                </div>
               ))
             }</td>
           </tr>

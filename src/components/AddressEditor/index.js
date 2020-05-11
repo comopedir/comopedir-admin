@@ -98,7 +98,7 @@ const AddressEditor = ({
       <>
         <Loader loading={loading} />
         <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+          <input
             type="hidden"
             name="id"
             value={id}

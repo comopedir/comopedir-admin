@@ -12,11 +12,6 @@ const CategoryEdit = ({title, data, className, refetch}) => {
     translations,
    } = data;
 
-   console.log('id:', id);
-   console.log('slug:', slug);
-   console.log('priority:', priority);
-   console.log('translations:', translations);
-
   return (
     <div className={className}>
       <fieldset>
@@ -46,12 +41,10 @@ const CategoryEdit = ({title, data, className, refetch}) => {
 
         <TranslationEditor
           id={id}
-          mutation="updateCategory"
-          input="UpdateCategoryInput"
+          mutation="createCategoryTranslation"
+          input="CreateCategoryTranslationInput"
           node="category"
-          field="priority"
-          legend="Traduções"
-          value={priority}
+          value={translations}
           refetch={refetch}
         />
 
