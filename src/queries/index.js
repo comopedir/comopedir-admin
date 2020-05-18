@@ -240,6 +240,50 @@ export const GET_CATEGORY = gql`
   }
 `;
 
+export const GET_PAYMENT_TYPES = gql`
+  query allPaymentTypes {
+    paymentTypes(first: 9999) {
+      edges {
+        node {
+          id
+          slug
+          priority
+          translations {
+            id
+            language {
+              id
+              isoCode
+              name
+            }
+            name
+            description
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PAYMENT_TYPE = gql`
+  query getPaymentType($id: String) {
+    paymentType(id: $id) {
+      id
+      slug
+      priority
+      translations {
+        id
+        language {
+          id
+          isoCode
+          name
+        }
+        name
+        description
+      }
+    }
+  }
+`;
+
 export const GET_LANGUAGES = gql`
   query allLanguages {
     languages(first: 9999) {
