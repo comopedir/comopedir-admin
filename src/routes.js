@@ -18,6 +18,8 @@ import Configuration from "./pages/dashboardStack/Configuration";
 import AirtableConfiguration from "./pages/dashboardStack/AirtableConfiguration";
 import Categories from "./pages/dashboardStack/Category/list";
 import Category from "./pages/dashboardStack/Category/edit";
+import PaymentTypes from "./pages/dashboardStack/PaymentType/list";
+import PaymentType from "./pages/dashboardStack/PaymentType/edit";
 import Languages from "./pages/dashboardStack/Language/list";
 import Language from "./pages/dashboardStack/Language/edit";
 import LanguageNew from "./pages/dashboardStack/Language/new";
@@ -65,6 +67,14 @@ export default function Routes() {
           <PrivateRoute path="/category/:id">
             <h2>Categoria</h2>
             <Category />
+          </PrivateRoute>
+          <PrivateRoute path="/paymentTypes">
+            <h2>Tipos de pagamentos</h2>
+            <PaymentTypes />
+          </PrivateRoute>
+          <PrivateRoute path="/paymentType/:id">
+            <h2>Tipo de pagamento</h2>
+            <PaymentType />
           </PrivateRoute>
           <PrivateRoute path="/languages">
             <h2>Linguagens</h2>
